@@ -5,7 +5,7 @@ from dynamics import rhs
 from integrators import euler_step, rk4_step
 
 
-# Physical parameters
+# Physical parameters (do not change these)
 q = 1.0
 m = 1.0
 B = np.array([0.0, 0.0, 1.0])
@@ -16,8 +16,8 @@ y0 = np.array([
     0.0, 1.0, 0.0
 ])
 
-# Simulation parameters
-dt = 0.01
+# Simulation parameters (can be varied if wanted will change results tho)
+dt = 0.001
 steps = 2000
 
 # Separate states for Euler and RK4
