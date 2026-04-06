@@ -25,6 +25,8 @@ y_euler = y0.copy()
 y_rk4 = y0.copy()
 
 trajectory_euler = []
+energy_euler = []
+energy_rk4 = []
 trajectory_rk4 = []
 
 t = 0.0
@@ -33,6 +35,12 @@ for _ in range(steps):
     trajectory_euler.append(y_euler[:3].copy())
     trajectory_rk4.append(y_rk4[:3].copy())
 
+    v_euler = y_euler[3:6]
+    v_rk4 = y_rk4[3:6]
+
+    energy_euler.append(0.5 * m * np.dot(v_euler, v_euler))
+    energy_rk4.append(0.5 * m * np.dot(v_rk4, v_rk4))
+
     y_euler = euler_step(rhs, t, y_euler, dt, q, m, B)
     y_rk4 = rk4_step(rhs, t, y_rk4, dt, q, m, B)
 
@@ -40,6 +48,8 @@ for _ in range(steps):
 
 trajectory_euler = np.array(trajectory_euler)
 trajectory_rk4 = np.array(trajectory_rk4)
+energy_euler = np.array(energy_euler)
+energy_rk4 = np.array(energy_rk4)
 
 # Plot trajectories in the x-y plane
 plt.figure(figsize=(7, 7))
@@ -51,4 +61,18 @@ plt.title("Charged Particle Trajectory: Euler vs RK4")
 plt.axis("equal")
 plt.legend()
 plt.grid(True)
+plt.show()
+
+# Plot energy over time
+plt.figure()
+
+plt.plot(energy_euler, label="Euler")
+plt.plot(energy_rk4, label="RK4")
+
+plt.xlabel("Step")
+plt.ylabel("Energy")
+plt.title("Energy conservation")
+plt.legend()
+plt.grid(True)
+
 plt.show()
