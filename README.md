@@ -24,3 +24,6 @@ Euler method
 Observations:
 Euler shows visible numerical drift (trajectory expands over time)
 RK4 maintains a stable circular trajectory, showing more accuracy
+
+## Changing the Timestep 
+Reducing the timestep improves the accuracy of Euler integration, but it still does not conserve energy exactly. RK4, on the other hand, maintains energy much more accurately even for larger timesteps. wich makes total sense here.
