@@ -52,6 +52,9 @@ trajectory_rk4 = np.array(trajectory_rk4)
 energy_euler = np.array(energy_euler)
 energy_rk4 = np.array(energy_rk4)
 
+position_error = np.linalg.norm(trajectory_euler - trajectory_rk4, axis=1)
+energy_error = np.abs(energy_euler - energy_rk4)
+
 # Plot trajectories in the x-y plane
 plt.figure(figsize=(7, 7))
 plt.plot(trajectory_euler[:, 0], trajectory_euler[:, 1], label="Euler")
@@ -73,6 +76,20 @@ plt.plot(energy_rk4, label="RK4")
 plt.xlabel("Step")
 plt.ylabel("Energy")
 plt.title("Energy conservation")
+plt.legend()
+plt.grid(True)
+
+plt.show()
+
+# Plot error between Euler and RK4
+plt.figure()
+
+plt.plot(position_error, label=r"$\|x_{\mathrm{Euler}} - x_{\mathrm{RK4}}\|$")
+plt.plot(energy_error, label=r"$|E_{\mathrm{Euler}} - E_{\mathrm{RK4}}|$")
+
+plt.xlabel(r"Step $n$")
+plt.ylabel(r"Error")
+plt.title("Difference between Euler and RK4")
 plt.legend()
 plt.grid(True)
 
