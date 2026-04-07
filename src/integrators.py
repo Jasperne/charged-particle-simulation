@@ -1,14 +1,10 @@
 def euler_step(f, t, y, dt, *args):
-    """
-    Perform one Euler integration step.
-    """
+   
     return y + dt * f(t, y, *args)
 
 
 def rk4_step(f, t, y, dt, *args):
-    """
-    Perform one Runge-Kutta 4 integration step.
-    """
+  
     k1 = f(t, y, *args)
     k2 = f(t + dt / 2, y + dt / 2 * k1, *args)
     k3 = f(t + dt / 2, y + dt / 2 * k2, *args)

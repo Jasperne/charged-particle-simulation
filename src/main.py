@@ -9,6 +9,7 @@ from integrators import euler_step, rk4_step
 q = 1.0
 m = 1.0
 B = np.array([0.0, 0.0, 1.0])
+E = np.array([0.1, 0.0, 0.0])
 
 # Initial state: [x, y, z, vx, vy, vz]
 y0 = np.array([
@@ -17,7 +18,7 @@ y0 = np.array([
 ])
 
 # Simulation parameters (can be varied if wanted will change results tho)
-dt = 0.001
+dt = 0.01
 steps = 2000
 
 # Separate states for Euler and RK4
@@ -41,8 +42,8 @@ for _ in range(steps):
     energy_euler.append(0.5 * m * np.dot(v_euler, v_euler))
     energy_rk4.append(0.5 * m * np.dot(v_rk4, v_rk4))
 
-    y_euler = euler_step(rhs, t, y_euler, dt, q, m, B)
-    y_rk4 = rk4_step(rhs, t, y_rk4, dt, q, m, B)
+    y_euler = euler_step(rhs, t, y_euler, dt, q, m, E, B,)
+    y_rk4 = rk4_step(rhs, t, y_rk4, dt, q, m, E, B,)
 
     t += dt
 
